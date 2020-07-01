@@ -9,7 +9,11 @@ const port = process.env.PORT || 80
 app.use('/api/auth', require('./routes/auth.routes'))
 
 app.get('/',(req, res) => {
-    res.end ('<h1>SCHOOL PLATFORM API</h1>')
+    res.send (
+        `<h1>SCHOOL PLATFORM API</h1>
+        <h3>test PATH - /users</h3>
+        `
+        )
 })
 app.get('/users',(req,res) => {
     res.send(testData)
