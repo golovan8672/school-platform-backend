@@ -10,20 +10,17 @@ router.post('/registration', async (req,res) => {
     try{
         console.log("Body:", req.body)
 
-        const {fio,login,email,mobileNumber,role ,password} = req.body
+        const {loginpassword} = req.body
 
         let userLogin  = await User.findOne({login})
-        let userEmail = await User.findOne({email})
 
         if (userLogin ) {
             return res.status(400).json({message: 'Пользователь с таким логином уже существует'})
         }
-        if (userEmail) {
-            return res.status(400).json({message: 'Пользователь с такой почтой уже существует'})
-        }
+
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        let user = new User({fio,login,email,mobileNumber,role,password: hashedPassword})
+        let user = new User({login,password: hashedPassword})
 
         await user.save()
 
