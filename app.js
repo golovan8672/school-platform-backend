@@ -8,7 +8,6 @@ const port = process.env.PORT || 80
 
 app.use('/api/auth', require('./routes/auth.routes'))
 
-app.use('/api/info', require('./routes/info.routes'))
 
 app.get('/',(req, res) => {
     res.send (

@@ -23,7 +23,7 @@ router.post('/registration',
             })
         }
 
-        const {fio,login,email,mobileNumber,role,password} = req.body
+        const {email,password} = req.body
 
         let userLogin  = await User.findOne({login})
         let userEmail = await User.findOne({email})
@@ -36,7 +36,7 @@ router.post('/registration',
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        let user = new user({fio,login,email,mobileNumber,role, password: hashedPassword})
+        let user = new user({email,password: hashedPassword})
 
         await user.save()
 
