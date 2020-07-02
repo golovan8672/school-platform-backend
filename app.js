@@ -9,9 +9,6 @@ const port = process.env.PORT || 80
 
 app.use(express.json({ extended: true }))
 
-
-
-
 app.use('/api/auth', require('./routes/auth.routes'))
 
 
@@ -28,5 +25,5 @@ async function start(){
         process.exit(1)
     }
 }
-start()
+
 app.listen(port, () => console.log(`Server has been started on port ${port}`))
