@@ -13,6 +13,8 @@ app.use('/api/auth', require('./routes/auth.routes'))
 
 
 
+app.listen(port, () => console.log(`Server has been started on port ${port}`))
+
 async function start(){
     try {
         await mongoose.connect(config.get('mongoUri'),{
@@ -25,5 +27,4 @@ async function start(){
         process.exit(1)
     }
 }
-
-app.listen(port, () => console.log(`Server has been started on port ${port}`))
+start()
