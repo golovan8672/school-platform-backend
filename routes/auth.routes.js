@@ -3,11 +3,10 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
-const Student = require('../models/Student')
-const Teacher = require('../models/Teacher')
+const User = require('../models/User')
 const router = Router()
 
-router.post('/studentRegister',
+router.post('/registration',
 [
     check('email','Некорректный email').isEmail(),
     check('password','Минимальная длина пароля должна быть 6 символов').isLength({min:6})
@@ -24,22 +23,22 @@ router.post('/studentRegister',
             })
         }
 
-        const {fio,login,email,role,studentClass,password} = req.body
+        const {fio,login,email,mobileNumber,role,password} = req.body
 
-        let studentLogin  = await Student.findOne({login})
-        let studentEmail = await Student.findOne({email})
+        let userLogin  = await User.findOne({login})
+        let userEmail = await User.findOne({email})
 
-        if (studentLogin ) {
-            return res.status(400).json({message: 'Ученик с таким логином уже существует'})
+        if (userLogin ) {
+            return res.status(400).json({message: 'Пользователь с таким логином уже существует'})
         }
-        if (studentEmail) {
-            return res.status(400).json({message: 'Ученик с такой почтой уже существует'})
+        if (userEmail) {
+            return res.status(400).json({message: 'Пользователь с такой почтой уже существует'})
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        let student = new student({fio,login,email,role,studentClass, password: hashedPassword})
+        let user = new user({fio,login,email,mobileNumber,role, password: hashedPassword})
 
-        await student.save()
+        await user.save()
 
         res.status(201).json({message: "Пользователь создан"})
     } catch (e){
@@ -65,7 +64,7 @@ router.post('/login',
 
         const {login,password} = req.body
 
-        let user = await (Student.findOne({login}) && Teacher.findOne({login}))
+        let user = await User.findOne({login})
 
         if (!user) {
             return res.status(400).json({message: 'Неверный логин или пароль'})
