@@ -10,7 +10,7 @@ router.post('/registration', async (req,res) => {
     try{
         console.log("Body:", req.body)
 
-        const {loginpassword} = req.body
+        const {login,password} = req.body
 
         let userLogin  = await User.findOne({login})
 
