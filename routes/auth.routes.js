@@ -6,37 +6,24 @@ const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
 const router = Router()
 
-router.post('/registration',
-[
-    check('email','Некорректный email').isEmail(),
-    check('password','Минимальная длина пароля должна быть 6 символов').isLength({min:6})
-]
-, async (req,res) => {
+router.post('/registration', async (req,res) => {
     try{
-        const errors = validationResult(req)
+        console.log("Body:", req.body)
 
-        if(!errors.isEmpty()){
-            return res.status(400).json({
-                errors: errors.array(),
-                message: "Некорректные данные при регистрации"
+        const {fio,login,email,mobileNumber,role ,password} = req.body
 
-            })
-        }
-
-        const {email,password} = req.body
-
-        // let userLogin  = await User.findOne({login})
+        let userLogin  = await User.findOne({login})
         let userEmail = await User.findOne({email})
 
-        // if (userLogin ) {
-        //     return res.status(400).json({message: 'Пользователь с таким логином уже существует'})
-        // }
+        if (userLogin ) {
+            return res.status(400).json({message: 'Пользователь с таким логином уже существует'})
+        }
         if (userEmail) {
             return res.status(400).json({message: 'Пользователь с такой почтой уже существует'})
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        let user = new User({email,password: hashedPassword})
+        let user = new User({fio,login,email,mobileNumber,role,password: hashedPassword})
 
         await user.save()
 
