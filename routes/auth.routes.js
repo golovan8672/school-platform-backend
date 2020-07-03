@@ -18,15 +18,15 @@ router.post('/registration', async (req,res) => {
         const userPhone  = await User.findOne({mobileNumber})
         
         if (userPhone) {
-            return res.status(400).json({message: 'Пользователь с таким номером уже существует'})
+            return res.status(400).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
         }
 
         if (userEmail) {
-            return res.status(400).json({message: 'Пользователь с такой почтой уже существует'})
+            return res.status(400).json({message: 'Пользователь с такой почтой уже существует',resultCode: 1})
         }
 
         if (userLogin ) {
-            return res.status(400).json({message: 'Пользователь с таким логином уже существует'})
+            return res.status(400).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
         }
 
 
@@ -35,7 +35,7 @@ router.post('/registration', async (req,res) => {
 
         await user.save()
 
-        res.status(201).json({message: "Пользователь создан"})
+        res.status(201).json({message: "Пользователь создан",resultCode: 0})
     } catch (e){
         res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
     }
