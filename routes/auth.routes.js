@@ -75,12 +75,10 @@ router.post('/studentReg', async (req,res) => {
 
         
 
-        const studentLogin  = await Student.findOne({login}) && Teacher.findOne({login}) 
-        const studentEmail  = await Student.findOne({email}) && Teacher.findOne({email}) 
-        const studentPhone  = await Student.findOne({mobileNumber}) && Teacher.findOne({mobileNumber}) 
-        
-        console.log(studentLogin,studentEmail,studentPhone)
-        
+        const studentLogin  = await (Student.findOne({login}) && Teacher.findOne({login})) 
+        const studentEmail  = await (Student.findOne({email}) && Teacher.findOne({email})) 
+        const studentPhone  = await (Student.findOne({mobileNumber}) && Teacher.findOne({mobileNumber})) 
+
         if (studentPhone) {
             return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
         }
