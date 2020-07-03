@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "mongoUri": "mongodb+srv://golovan8672:xum01KnhZhrjQx7U@cluster0.iybeo.azure.mongodb.net/app?retryWrites=true&w=majority",
+=======
+    "MONGODB_URI": "mongodb+srv://golovan:dedperded007@school-platform.lsrt9.azure.mongodb.net/app?retryWrites=true&w=majority",
+>>>>>>> 0044ad6f646a633c2ffb1e8be1139d09e3c5564f
     "jwtSecret": "golovan8672"
 }
