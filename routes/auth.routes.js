@@ -16,10 +16,10 @@ router.post('/moderatorReg', async (req,res) => {
 
         const {fio,login,role,password} = req.body
 
-        const moderatorLogin  = await Moderator.findOne({login})
+        const moderatorLogin  = await Teacher.findOne({login}) || await Student.findOne({login}) || await Moderator.findOne({login})
 
         if (moderatorLogin) {
-            return res.status(202).json({message: 'Модератор с таким логином уже существует',resultCode: 1})
+            return res.status(202).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -39,9 +39,9 @@ router.post('/teacherReg', async (req,res) => {
 
         const {fio,login,email,mobileNumber,role,classroom,subject,password} = req.body
 
-        const teacherLogin  = await Teacher.findOne({login}) && Student.findOne({login})
-        const teacherEmail  = await Teacher.findOne({email}) && Student.findOne({email})
-        const teacherPhone  = await Teacher.findOne({mobileNumber}) && Student.findOne({mobileNumber})
+        const teacherLogin  = await Teacher.findOne({login}) || await Student.findOne({login}) || await Moderator.findOne({login})
+        const teacherEmail  = await Teacher.findOne({email}) || await Student.findOne({email})
+        const teacherPhone  = await Teacher.findOne({mobileNumber}) || await Student.findOne({mobileNumber})
         
         if (teacherPhone) {
             return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
@@ -75,9 +75,9 @@ router.post('/studentReg', async (req,res) => {
 
         
 
-        const studentLogin  = await Student.findOne({login}) || await Teacher.findOne({login})
-        const studentEmail  = await Student.findOne({email}) || await Teacher.findOne({email})
-        const studentPhone  = await Student.findOne({mobileNumber}) || await Teacher.findOne({mobileNumber})
+        const studentLogin  = await Student.findOne({login}) || await Teacher.findOne({login}) || await Moderator.findOne({login})
+        const studentEmail  = await Student.findOne({email}) || await Teacher.findOne({email}) 
+        const studentPhone  = await Student.findOne({mobileNumber}) || await Teacher.findOne({mobileNumber}) 
 
         if (studentPhone) {
             return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
@@ -122,7 +122,7 @@ router.post('/login',
         const {login,password} = req.body
 
 
-        let user = await Users.findOne({login})
+        let user = await Student.findOne({login}) || await Teacher.findOne({login}) || await Moderator.findOne({login})
 
         if (!user) {
             return res.status(202).json({message: 'Неверный логин или пароль',resultCode: 1})
