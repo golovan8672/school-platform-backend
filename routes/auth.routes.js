@@ -4,36 +4,94 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
-const User = require('../models/User')
+const Moderator = require('../models/Moderator')
+const Teacher = require('../models/Teacher')
+const Student = require('../models/Student')
 
-
-router.post('/registration', async (req,res) => {
+router.post('/moderatorReg', async (req,res) => {
     try{
         console.log("Body:", req.body)
 
-        const {fio,login,email,mobileNumber,role,password} = req.body
+        const {fio,login,role,password} = req.body
 
-        const userLogin  = await User.findOne({login})
-        const userEmail  = await User.findOne({email})
-        const userPhone  = await User.findOne({mobileNumber})
+        const moderatorLogin  = await Moderator.findOne({login})
+
+        if (moderatorLogin) {
+            return res.status(202).json({message: 'Модератор с таким логином уже существует',resultCode: 1})
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 12)
+        const moderator = new Moderator({fio,login,role,password: hashedPassword})
+
+        await moderator.save()
+
+        res.status(201).json({message: "Пользователь создан",resultCode: 0})
+    } catch (e){
+        res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
+    }
+})
+
+router.post('/teacherReg', async (req,res) => {
+    try{
+        console.log("Body:", req.body)
+
+        const {fio,login,email,mobileNumber,role,classroom,subject,password} = req.body
+
+        const teacherLogin  = await Teacher.findOne({login})
+        const teacherEmail  = await Teacher.findOne({email})
+        const teacherPhone  = await Teacher.findOne({mobileNumber})
         
-        if (userPhone) {
-            return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
+        if (teacherPhone) {
+            return res.status(202).json({message: 'Учитель с таким номером уже существует',resultCode: 1})
         }
 
-        if (userEmail) {
-            return res.status(202).json({message: 'Пользователь с такой почтой уже существует',resultCode: 1})
+        if (teacherEmail) {
+            return res.status(202).json({message: 'Учитель с такой почтой уже существует',resultCode: 1})
         }
 
-        if (userLogin ) {
-            return res.status(202).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
+        if (teacherLogin ) {
+            return res.status(202).json({message: 'Учитель с таким логином уже существует',resultCode: 1})
         }
 
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        const user = new User({fio,login,email,mobileNumber,role,password: hashedPassword})
+        const teacher = new Teacher({fio,login,email,mobileNumber,role,classroom,subject,password: hashedPassword})
 
-        await user.save()
+        await teacher.save()
+
+        res.status(201).json({message: "Пользователь создан",resultCode: 0})
+    } catch (e){
+        res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
+    }
+})
+
+router.post('/studentReg', async (req,res) => {
+    try{
+        console.log("Body:", req.body)
+
+        const {fio,login,email,mobileNumber,classroom,role,password} = req.body
+
+        const studentLogin  = await User.findOne({login})
+        const studentEmail  = await User.findOne({email})
+        const studentPhone  = await User.findOne({mobileNumber})
+        
+        if (studentPhone) {
+            return res.status(202).json({message: 'Ученик с таким номером уже существует',resultCode: 1})
+        }
+
+        if (studentEmail) {
+            return res.status(202).json({message: 'Ученик с такой почтой уже существует',resultCode: 1})
+        }
+
+        if (studentLogin ) {
+            return res.status(202).json({message: 'Ученик с таким логином уже существует',resultCode: 1})
+        }
+
+
+        const hashedPassword = await bcrypt.hash(password, 12)
+        const student = new Student({fio,login,email,mobileNumber,role,classroom,password: hashedPassword})
+
+        await student.save()
 
         res.status(201).json({message: "Пользователь создан",resultCode: 0})
     } catch (e){
@@ -59,7 +117,9 @@ router.post('/login',
         }
         const {login,password} = req.body
 
-        let user = await User.findOne({login})
+        const Users = {Student,Moderator,Teacher}
+
+        let user = await Users.findOne({login})
 
         if (!user) {
             return res.status(202).json({message: 'Неверный логин или пароль',resultCode: 1})
