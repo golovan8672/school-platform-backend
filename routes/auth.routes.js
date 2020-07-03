@@ -8,6 +8,8 @@ const Moderator = require('../models/Moderator')
 const Teacher = require('../models/Teacher')
 const Student = require('../models/Student')
 
+const Users = {Student,Moderator,Teacher}
+
 router.post('/moderatorReg', async (req,res) => {
     try{
         console.log("Body:", req.body)
@@ -37,9 +39,9 @@ router.post('/teacherReg', async (req,res) => {
 
         const {fio,login,email,mobileNumber,role,classroom,subject,password} = req.body
 
-        const teacherLogin  = await Teacher.findOne({login})
-        const teacherEmail  = await Teacher.findOne({email})
-        const teacherPhone  = await Teacher.findOne({mobileNumber})
+        const teacherLogin  = await Users.findOne({login})
+        const teacherEmail  = await Users.findOne({email})
+        const teacherPhone  = await Users.findOne({mobileNumber})
         
         if (teacherPhone) {
             return res.status(202).json({message: 'Учитель с таким номером уже существует',resultCode: 1})
@@ -71,9 +73,11 @@ router.post('/studentReg', async (req,res) => {
 
         const {fio,login,email,mobileNumber,classroom,role,password} = req.body
 
-        const studentLogin  = await Student.findOne({login})
-        const studentEmail  = await Student.findOne({email})
-        const studentPhone  = await Student.findOne({mobileNumber})
+        
+
+        const studentLogin  = await Users.findOne({login})
+        const studentEmail  = await Users.findOne({email})
+        const studentPhone  = await Users.findOne({mobileNumber})
         
         if (studentPhone) {
             return res.status(202).json({message: 'Ученик с таким номером уже существует',resultCode: 1})
@@ -117,7 +121,6 @@ router.post('/login',
         }
         const {login,password} = req.body
 
-        const Users = {Student,Moderator,Teacher}
 
         let user = await Users.findOne({login})
 
