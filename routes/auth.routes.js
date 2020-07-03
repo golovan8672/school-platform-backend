@@ -3,7 +3,7 @@ const router = Router()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const config = require('config')
-// const {check, validationResult} = require('express-validator')
+const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
 
 
@@ -40,6 +40,7 @@ router.post('/registration', async (req,res) => {
         res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
     }
 })
+
 router.post('/login',
 [
     check('login','Введите логин').exists(),
