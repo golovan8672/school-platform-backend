@@ -39,9 +39,9 @@ router.post('/teacherReg', async (req,res) => {
 
         const {fio,login,email,mobileNumber,role,classroom,subject,password} = req.body
 
-        const teacherLogin  = await Users.findOne({login})
-        const teacherEmail  = await Users.findOne({email})
-        const teacherPhone  = await Users.findOne({mobileNumber})
+        const teacherLogin  = await Teacher.findOne({login})
+        const teacherEmail  = await Teacher.findOne({email})
+        const teacherPhone  = await Teacher.findOne({mobileNumber})
         
         if (teacherPhone) {
             return res.status(202).json({message: 'Учитель с таким номером уже существует',resultCode: 1})
