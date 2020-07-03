@@ -57,7 +57,6 @@ router.post('/login',
 
             })
         }
-
         const {login,password} = req.body
 
         let user = await User.findOne({login})
@@ -78,12 +77,7 @@ router.post('/login',
             {expiresIn: '1h'}
         )
 
-        res.status(200).json({message: "Авторизация прошла успешно",resultCode: 0})
-
         res.json({token, userId: user.id, role: user.role, login: user.login})
-
-
-
 
     } catch (e){
         res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
