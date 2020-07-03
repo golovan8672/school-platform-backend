@@ -8,7 +8,7 @@ const Moderator = require('../models/Moderator')
 const Teacher = require('../models/Teacher')
 const Student = require('../models/Student')
 
-const Users = {Student,Moderator,Teacher}
+const Users = [Student,Moderator,Teacher]
 
 router.post('/moderatorReg', async (req,res) => {
     try{
