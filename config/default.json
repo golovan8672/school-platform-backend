@@ -1,4 +1,4 @@
 {
-    "MONGODB_URI": "process.env.MONGO_URL",
+    "MONGODB_URI": "mongodb+srv://golovan:dedperded007@school-platform.lsrt9.azure.mongodb.net/app?retryWrites=true&w=majority",
     "jwtSecret": "golovan8672"
 }
