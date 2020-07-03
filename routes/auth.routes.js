@@ -18,15 +18,15 @@ router.post('/registration', async (req,res) => {
         const userPhone  = await User.findOne({mobileNumber})
         
         if (userPhone) {
-            return res.status(400).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
+            return res.status(200).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
         }
 
         if (userEmail) {
-            return res.status(400).json({message: 'Пользователь с такой почтой уже существует',resultCode: 1})
+            return res.status(200).json({message: 'Пользователь с такой почтой уже существует',resultCode: 1})
         }
 
         if (userLogin ) {
-            return res.status(400).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
+            return res.status(200).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
         }
 
 
