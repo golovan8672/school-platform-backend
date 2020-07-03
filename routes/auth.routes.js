@@ -14,7 +14,17 @@ router.post('/registration', async (req,res) => {
         const {fio,login,email,mobileNumber,role,password} = req.body
 
         const userLogin  = await User.findOne({login})
+        const userEmail  = await User.findOne({email})
+        const userPhone  = await User.findOne({mobileNumber})
         
+        if (userPhone) {
+            return res.status(400).json({message: 'Пользователь с таким номером уже существует'})
+        }
+
+        if (userEmail) {
+            return res.status(400).json({message: 'Пользователь с такой почтой уже существует'})
+        }
+
         if (userLogin ) {
             return res.status(400).json({message: 'Пользователь с таким логином уже существует'})
         }
