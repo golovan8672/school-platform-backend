@@ -78,9 +78,7 @@ router.post('/login',
             {expiresIn: '1h'}
         )
 
-        res.json({token, userId: user.id, role: user.role, login: user.login})
-
-        res.status(200).json({message: "Авторизация прошла успешно",resultCode: 0})
+        res.json({token, userId: user.id, role: user.role, login: user.login, resultCode: 0})
 
 
     } catch (e){
