@@ -1,4 +1,4 @@
 {
-    "mongoUri": "mongodb+srv://golovan:dedperded007@school-platform.lsrt9.azure.mongodb.net/app?retryWrites=true&w=majority",
+    "mongoUri": "mongodb+srv://golovan8672:xum01KnhZhrjQx7U@cluster0.iybeo.azure.mongodb.net/app?retryWrites=true&w=majority",
     "jwtSecret": "golovan8672"
 }
