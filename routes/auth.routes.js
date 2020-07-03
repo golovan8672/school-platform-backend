@@ -18,15 +18,15 @@ router.post('/registration', async (req,res) => {
         const userPhone  = await User.findOne({mobileNumber})
         
         if (userPhone) {
-            return res.status(200).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
+            return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
         }
 
         if (userEmail) {
-            return res.status(200).json({message: 'Пользователь с такой почтой уже существует',resultCode: 1})
+            return res.status(202).json({message: 'Пользователь с такой почтой уже существует',resultCode: 1})
         }
 
         if (userLogin ) {
-            return res.status(200).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
+            return res.status(202).json({message: 'Пользователь с таким логином уже существует',resultCode: 1})
         }
 
 
@@ -63,13 +63,13 @@ router.post('/login',
         let user = await User.findOne({login})
 
         if (!user) {
-            return res.status(400).json({message: 'Неверный логин или пароль'})
+            return res.status(202).json({message: 'Неверный логин или пароль',resultCode: 1})
         }
 
         const isMatch = await bcrypt.compare(password,user.password)
         
         if (!isMatch) {
-            return res.status(400).json({message: 'Неверный логин или пароль'})
+            return res.status(202).json({message: 'Неверный логин или пароль',resultCode: 1})
         }
 
         const token = jwt.sign(
@@ -79,6 +79,8 @@ router.post('/login',
         )
 
         res.json({token, userId: user.id, role: user.role, login: user.login})
+
+        res.status(200).json({message: "Авторизация прошла успешно",resultCode: 0})
 
 
     } catch (e){
