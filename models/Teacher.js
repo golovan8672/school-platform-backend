@@ -7,7 +7,7 @@ const teacherSchema = new Schema({
     login: {type: String, required: true, unique: true},
     classroom: {type: String},
     subject:{type: String, required: true},
-    role: {type: String, default: 'student'},
+    role: {type: String, default: 'teacher'},
     password: {type: String, required: true}
 })
 
