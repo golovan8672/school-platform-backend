@@ -39,9 +39,9 @@ router.post('/teacherReg', async (req,res) => {
 
         const {fio,login,email,mobileNumber,role,classroom,subject,password} = req.body
 
-        const teacherLogin  = await Teacher.findOne({login}) || Student.findOne({login})
-        const teacherEmail  = await Teacher.findOne({email}) || Student.findOne({email})
-        const teacherPhone  = await Teacher.findOne({mobileNumber}) || Student.findOne({mobileNumber})
+        const teacherLogin  = await Teacher.findOne({login}) && Student.findOne({login})
+        const teacherEmail  = await Teacher.findOne({email}) && Student.findOne({email})
+        const teacherPhone  = await Teacher.findOne({mobileNumber}) && Student.findOne({mobileNumber})
         
         if (teacherPhone) {
             return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
@@ -75,9 +75,9 @@ router.post('/studentReg', async (req,res) => {
 
         
 
-        const studentLogin  = await Student.findOne({login}) || Teacher.findOne({login}) 
-        const studentEmail  = await Student.findOne({email}) || Teacher.findOne({email}) 
-        const studentPhone  = await Student.findOne({mobileNumber}) || Teacher.findOne({mobileNumber}) 
+        const studentLogin  = await Student.findOne({login}) && Teacher.findOne({login}) 
+        const studentEmail  = await Student.findOne({email}) && Teacher.findOne({email}) 
+        const studentPhone  = await Student.findOne({mobileNumber}) && Teacher.findOne({mobileNumber}) 
         
         if (studentPhone) {
             return res.status(202).json({message: 'Пользователь с таким номером уже существует',resultCode: 1})
