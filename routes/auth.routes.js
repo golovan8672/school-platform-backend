@@ -95,7 +95,8 @@ router.post('/studentReg', async (req,res) => {
 
         await student.save()
 
-        res.status(201).json({message: "Ученик создан",resultCode: 0})
+        
+        
     } catch (e){
         res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
     }
