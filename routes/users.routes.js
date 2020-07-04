@@ -5,7 +5,7 @@ const Student = require('../models/Student')
 
 router.get('/students',function(req,res){
         try {
-            const students = await Student.find();
+            const students = Student.find();
             const {role,email,login,mobileNumber,fio,classroom} = students
             res.status(201).json(role,email,login,mobileNumber,fio,classroom);
         } catch (error) {
