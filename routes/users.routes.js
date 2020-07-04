@@ -4,12 +4,14 @@ const Student = require('../models/Student')
 
 
 router.get('/students',function(req,res){
-	Student.find(function(err,students){
-		if(err)
-			res.send(err);
-		
-        res.status(200).json(students)
-	});
+        try {
+            const students = await Student.find();
+            const {role,email,login,mobileNumber,fio,classroom} = students
+            res.status(201).json(role,email,login,mobileNumber,fio,classroom);
+        } catch (error) {
+            res.status(500).json({message: error})
+        }
 });
+
 
 module.exports = router
