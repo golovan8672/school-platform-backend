@@ -18,4 +18,10 @@ router.get("/teachers", async (req, res) => {
     res.send(teachers);
 });
 
+router.delete('/students/:id', async (req, res) => {
+    await Student.findByIdAndRemove({_id: req.params.id})
+    res.send("Пользователь удален!")
+  })
+
 module.exports = router
+
