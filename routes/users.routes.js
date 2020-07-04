@@ -8,7 +8,7 @@ router.get('/students',function(req,res){
 		if(err)
 			res.send(err);
 		
-        res.status(200).json(students)
+        res.status(200).json({role: students.role, email: students.email, fio: students.fio, login: students.login, mobileNumber: students.mobileNumber, id: students.id})
 	});
 });
 
