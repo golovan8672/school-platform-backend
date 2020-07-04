@@ -8,7 +8,7 @@ router.get('/students',function(req,res){
 		if(err)
 			res.send(err);
 		
-        res.status(200).json([students.role])
+        res.status(200).json(students)
 	});
 });
 
