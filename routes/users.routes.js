@@ -18,8 +18,8 @@ router.get("/teachers", async (req, res) => {
     res.send(teachers);
 });
 
-router.delete('/students/:id', async (req, res) => {
-    await Student.findByIdAndRemove({_id: req.params.id})
+router.delete('/:id', async (req, res) => {
+    await Student.findByIdAndRemove({_id: req.params.id}) || await Moderator.findByIdAndRemove({_id: req.params.id}) || await Teacher.findByIdAndRemove({_id: req.params.id}) 
     res.send("Пользователь удален!")
   })
 
