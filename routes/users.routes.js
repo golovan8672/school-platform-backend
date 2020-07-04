@@ -4,7 +4,7 @@ const Student = require('../models/Student')
 
 
 router.get("/students", async (req, res) => {
-    const students = await Student.find().select("-password","-__v");
+    const students = await Student.find().select("-password").select("-__v");
     res.send(students);
   });
 
