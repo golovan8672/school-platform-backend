@@ -3,7 +3,7 @@ const router = Router()
 const Student = require('../models/Student')
 
 
-router.get("/students", auth, async (req, res) => {
+router.get("/students", async (req, res) => {
     const students = await Student.find().select("-password");
     res.send(students);
   });
