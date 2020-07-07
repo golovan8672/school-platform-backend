@@ -25,17 +25,10 @@ router.delete('/deleteUser/:id', async (req, res) => {
     res.send("Пользователь удален!")
 })
 
-// router.put('/updateUser/:id', async (req, res) => {
-//     await Moderator.updateOne({ _id: req.params.id }, { $set: req.body }) || await Teacher.updateOne({ _id: req.params.id }, { $set: req.body })
-//     
-// })
-
 router.put('/updateUser/:id',  async (req, res) => {
     await Student.findByIdAndUpdate(req.params.id, req.body) ||  await Teacher.findByIdAndUpdate(req.params.id, req.body) ||  await Moderator.findByIdAndUpdate(req.params.id, req.body)
     res.send("Пользователь обновлен!")
   });
-
-
 
 module.exports = router
 
