@@ -20,12 +20,12 @@ router.get("/teachers", async (req, res) => {
     res.send(teachers);
 });
 
-router.delete('deleteUser/:id', async (req, res) => {
+router.delete('/deleteUser/:id', async (req, res) => {
     await Student.findByIdAndRemove({ _id: req.params.id }) || await Moderator.findByIdAndRemove({ _id: req.params.id }) || await Teacher.findByIdAndRemove({ _id: req.params.id })
     res.send("Пользователь удален!")
 })
 
-router.put('updateUser/:id', async (req, res) => {
+router.put('/updateUser/:id', async (req, res) => {
     await Student.updateOne({ _id: req.params.id }, { $set: req.body })
     res.send("Пользователь обновлен!")
 })
