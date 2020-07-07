@@ -26,7 +26,7 @@ router.delete('/deleteUser/:id', async (req, res) => {
 })
 
 router.put('/updateUser/:id', async (req, res) => {
-    await Student.updateOne({ _id: req.params.id }, { $set: req.body }) || await Moderator.updateOne({ _id: req.params.id }, { $set: req.body }) || await Teacher.updateOne({ _id: req.params.id }, { $set: req.body })
+    await Moderator.updateOne({ _id: req.params.id }, { $set: req.body }) || await Teacher.updateOne({ _id: req.params.id }, { $set: req.body })
     res.send("Пользователь обновлен!")
 })
 
