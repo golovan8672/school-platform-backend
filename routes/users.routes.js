@@ -31,7 +31,7 @@ router.delete('/deleteUser/:id', async (req, res) => {
 // })
 
 router.put('/updateUser/:id',  async (req, res) => {
-    Student.findByIdAndUpdate(req.params.id, req.body)
+    await Student.findByIdAndUpdate(req.params.id, req.body)
     res.send("Пользователь обновлен!")
   });
 
