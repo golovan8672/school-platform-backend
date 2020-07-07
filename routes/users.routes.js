@@ -9,19 +9,28 @@ router.get("/students", async (req, res) => {
     const students = await Student.find().select("-password").select("-__v");
     res.send(students);
 });
+
 router.get("/moderators", async (req, res) => {
     const moderators = await Moderator.find().select("-password").select("-__v");
     res.send(moderators);
 });
+
 router.get("/teachers", async (req, res) => {
     const teachers = await Teacher.find().select("-password").select("-__v");
     res.send(teachers);
 });
 
-router.delete('/:id', async (req, res) => {
-    await Student.findByIdAndRemove({_id: req.params.id}) || await Moderator.findByIdAndRemove({_id: req.params.id}) || await Teacher.findByIdAndRemove({_id: req.params.id}) 
+router.delete('deleteUser/:id', async (req, res) => {
+    await Student.findByIdAndRemove({ _id: req.params.id }) || await Moderator.findByIdAndRemove({ _id: req.params.id }) || await Teacher.findByIdAndRemove({ _id: req.params.id })
     res.send("Пользователь удален!")
-  })
+})
+
+router.put('updateUser/:id', async (req, res) => {
+    await Student.updateOne({ _id: req.params.id }, { $set: req.body })
+    res.send("Пользователь обновлен!")
+})
+
+
 
 module.exports = router
 
