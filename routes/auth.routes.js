@@ -148,7 +148,7 @@ router.post('/login',
 })
 
 router.get("/me", auth, async (req, res) => {
-    const user = await User.findById(req.user._id).select("-password").select("-v");
+    const user = await Student.findById(req.user._id).select("-password").select("-v") || await Teacher.findById(req.user._id).select("-password").select("-v") || await Moderator.findById(req.user._id).select("-password").select("-v");
     res.send(user);
   });
 
