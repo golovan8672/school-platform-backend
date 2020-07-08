@@ -29,7 +29,7 @@ router.put('/updateUser/:id',  async (req, res) => {
     await Student.findByIdAndUpdate(req.params.id, req.body) ||  await Teacher.findByIdAndUpdate(req.params.id, req.body) ||  await Moderator.findByIdAndUpdate(req.params.id, req.body)
     res.send("Пользователь обновлен!")
   });
-  ///
+
 
 module.exports = router
 

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
+const auth = require('../middleware/auth.middleware')
 const Moderator = require('../models/Moderator')
 const Teacher = require('../models/Teacher')
 const Student = require('../models/Student')
@@ -145,5 +146,10 @@ router.post('/login',
         res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
     }
 })
+
+router.get("/me", auth, async (req, res) => {
+    const user = await User.findById(req.user._id).select("-password").select("-v");
+    res.send(user);
+  });
 
 module.exports = router
