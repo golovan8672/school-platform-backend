@@ -25,10 +25,20 @@ router.delete('/deleteUser/:id', async (req, res) => {
     res.send("Пользователь удален!")
 })
 
-router.put('/updateUser/:id', async (req, res) => {
-    await Student.findByIdAndUpdate(req.params.id, req.body) ||  await Teacher.findByIdAndUpdate(req.params.id, req.body) ||  await Moderator.findByIdAndUpdate(req.params.id, req.body)
+router.put('/updateModerator/:id', async (req, res) => {
+    await Moderator.findByIdAndUpdate(req.params.id, req.body)
     res.send("Пользователь обновлен!")
-  });
+});
+router.put('/updateStudent/:id', async (req, res) => {
+    await Student.findByIdAndUpdate(req.params.id, req.body)
+    res.send("Пользователь обновлен!")
+});
+
+router.put('/updateTeacher/:id', async (req, res) => {
+    await Teacher.findByIdAndUpdate(req.params.id, req.body) 
+    res.send("Пользователь обновлен!")
+});
+
 
 
 module.exports = router
