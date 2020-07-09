@@ -22,21 +22,21 @@ router.get("/teachers", async (req, res) => {
 
 router.delete('/deleteUser/:id', async (req, res) => {
     await Student.findByIdAndRemove({ _id: req.params.id }) || await Moderator.findByIdAndRemove({ _id: req.params.id }) || await Teacher.findByIdAndRemove({ _id: req.params.id })
-    res.send("Пользователь удален!")
+    res.status(200).json({message: "Пользователь удален"})
 })
 
 router.put('/updateModerator/:id', async (req, res) => {
     await Moderator.findByIdAndUpdate(req.params.id, req.body)
-    res.send("Пользователь обновлен!")
+    res.status(200).json({message: "Модератор обновлен!"})
 });
 router.put('/updateStudent/:id', async (req, res) => {
     await Student.findByIdAndUpdate(req.params.id, req.body)
-    res.send("Пользователь обновлен!")
+    res.status(200).json({message: "Ученик обновлен!"})
 });
 
 router.put('/updateTeacher/:id', async (req, res) => {
     await Teacher.findByIdAndUpdate(req.params.id, req.body) 
-    res.send("Пользователь обновлен!")
+    res.status(200).json({message: "Учитель обновлен!"})
 });
 
 

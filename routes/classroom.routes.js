@@ -23,7 +23,7 @@ router.post("/setClassroom",async(req,res)=>{
 });
 router.delete('/deleteClassroom/:id', async (req, res) => {
     await Classroom.findByIdAndRemove({ _id: req.params.id })
-    res.send("Класс удален!")
+    res.status(200).json({message: "Класс удален!"})
 })
 
 
