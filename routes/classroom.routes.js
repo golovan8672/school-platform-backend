@@ -13,6 +13,13 @@ router.get("/classrooms/:id", async (req, res) => {
     res.send(classroom);
 });
 
+router.delete('/classrooms/:id/deleteStudent', async (req, res) => {
+    const classroom = await Classroom.findById({ _id: req.params.id })
+    classroom.students.id(req.body).remove()
+    await classroom.save()
+    res.status(200).json({ message: "Ученик удален из класса удален!" })
+})
+
 // Добавление учителя и студента
 
 router.post("/classrooms/:id/addStudent", async (req, res) => {
