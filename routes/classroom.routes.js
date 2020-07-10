@@ -2,6 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const Classroom = require('../models/Classroom')
 
+//Получение списка классов и класса 
 
 router.get("/classrooms", async (req, res) => {
     const classrooms = await Classroom.find().select("-__v");
@@ -11,6 +12,9 @@ router.get("/classrooms/:id", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id).select("-__v")
     res.send(classroom);
 });
+
+// Добавление учителя и студента
+
 router.post("/classrooms/:id/addStudent", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
     classroom.students.push(req.body);
@@ -21,6 +25,9 @@ router.put("/classrooms/:id/addTeacher", async (req, res) => {
     await Classroom.findByIdAndUpdate(req.params.id, req.body)
     res.status(200).json({message: "Классный руководитель обновлен!"})
 });
+
+// Добавление и удаление классов
+
 router.post("/addClassroom", async (req, res) => {
     try {
         const newClassroom = new Classroom(req.body)
