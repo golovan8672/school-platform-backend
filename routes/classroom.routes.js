@@ -26,7 +26,6 @@ router.delete('/classrooms/:id/deleteStudent', async (req, res) => {
 router.post("/classrooms/:id/addStudent", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
     const {studentId,fio} = req.body;
-y
     const student = await classroom.students.indexOf({studentId})
 
     if (student) {
