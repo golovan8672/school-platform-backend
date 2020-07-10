@@ -8,7 +8,7 @@ router.get("/classrooms", async (req, res) => {
     res.send(classrooms);
 });
 router.get("/classrooms/:id", async (req, res) => {
-    const classroom = await Classroom.findById(req.params.id)
+    const classroom = await Classroom.findById(req.params.id).select("-__v")
     res.send(classroom);
 });
 router.post("/setClassroom",async(req,res)=>{
@@ -19,14 +19,10 @@ router.post("/setClassroom",async(req,res)=>{
     } catch (e){
         res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'})
     }
-
 });
 router.delete('/deleteClassroom/:id', async (req, res) => {
     await Classroom.findByIdAndRemove({ _id: req.params.id })
     res.status(200).json({message: "Класс удален!"})
 })
-
-
-
 
 module.exports = router
