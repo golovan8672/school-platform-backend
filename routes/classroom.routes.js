@@ -28,7 +28,7 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
     const {studentId,fio} = req.body;
     const student = await classroom.students.indexOf({studentId},0)
 
-    if (student === "-1") {
+    if (student === -1) {
         return res.status(202).json({message: 'Студент уже входит в состав класса',resultCode: 1})
     }
 
