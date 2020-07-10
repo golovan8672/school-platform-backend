@@ -11,10 +11,11 @@ router.get("/classrooms/:id", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id).select("-__v")
     res.send(classroom);
 });
-router.post("/classrooms/:id/addStudents", async (req, res) => {
+router.post("/classrooms/:id/addStudent", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
     classroom.students.push(req.body);
     await classroom.save();
+    res.status(200).json({ message: "Ученик добавлен!", resultCode: 0 })
 });
 router.post("/addClassroom", async (req, res) => {
     try {
