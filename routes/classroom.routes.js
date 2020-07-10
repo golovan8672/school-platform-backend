@@ -18,7 +18,7 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
     res.status(200).json({ message: "Ученик добавлен!", resultCode: 0 })
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
-    await classroom.findByIdAndUpdate(req.params.id, req.body)
+    await Classroom.findByIdAndUpdate(req.params.id, req.body)
     res.status(200).json({message: "Классный руководитель обновлен!"})
 });
 router.post("/addClassroom", async (req, res) => {
