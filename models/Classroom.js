@@ -9,7 +9,8 @@ const classroomSchema = new Schema({
     }],
     students: [{
         _id: false,
-        studentId: { type: String }
+        studentId: { type: String },
+        fio: {type: String}
     }],
     classTeacher: { type: String, default: 'none' }
 })
