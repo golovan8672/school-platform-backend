@@ -25,7 +25,7 @@ router.delete('/classrooms/:parentId/deleteForumMessage/:id', async (req, res) =
 
 router.delete('/classrooms/:parentId/deleteStudent/:id', async (req, res) => {
     const classroom = await Classroom.findById({ _id: req.params.parentId })
-    classroom.students.remove({studentId: req.body.id})
+    classroom.students.studentId(req.body.id).remove()
     await classroom.save()
     res.status(200).json({ message: "Ученик удален из класса!" })
 })
