@@ -10,8 +10,8 @@ const classForumMessage = new Schema({
 const classroomSchema = new Schema({
     classNumber: {type: String, required: true},
     classForumMessages: [classForumMessage],
-    students: {type: Array},
-    classTeacher: {type: String, default: 'none'}
+    students: [{studentId : {type: String}}],
+    classTeacherId: {type: String, default: 'none'}
 })
 
 module.exports = model('Classroom',classroomSchema)
