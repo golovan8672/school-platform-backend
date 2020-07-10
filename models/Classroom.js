@@ -10,7 +10,7 @@ const classForumMessage = new Schema({
 const classroomSchema = new Schema({
     classNumber: {type: String, required: true},
     classForumMessages: [classForumMessage],
-    students: [{type: Array}],
+    students: [{type: String}],
     classTeacher: {type: String,default: 'none'}
 })
 
