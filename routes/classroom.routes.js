@@ -23,7 +23,7 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
     await Classroom.findByIdAndUpdate(req.params.id, req.body)
-    res.status(200).json({message: "Классный руководитель обновлен!"})
+    res.status(200).json({message: "Классный руководитель добавлен!"})
 });
 
 // Добавление и удаление классов
