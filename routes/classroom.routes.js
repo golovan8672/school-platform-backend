@@ -16,6 +16,7 @@ router.get("/classrooms/:id", async (req, res) => {
 // Добавление учителя и студента
 
 router.post("/classrooms/:id/addStudent", async (req, res) => {
+    console.log("Body:", req.body)
     const classroom = await Classroom.findById(req.params.id);
     classroom.students.push(req.body);
     await classroom.save();
@@ -23,7 +24,7 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
     await Classroom.findByIdAndUpdate(req.params.id, req.body)
-    res.status(200).json({message: "Классный руководитель добавлен!"})
+    res.status(200).json({message: "Классный руководитель добавлен!", resultCode: 0})
 });
 
 // Добавление и удаление классов
