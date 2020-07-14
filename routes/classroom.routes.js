@@ -23,9 +23,10 @@ router.delete("/classrooms/:id/deleteMessage", async (req, res) => {
 });
 
 
-router.delete("/classrooms/:id/deleteStudent", async (req, res) => {
+router.put("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
+    const studentId = req.params.studentId
     const classroom = await Classroom.findById({_id: req.params.id});
-    classroom.students.remove(req.body);
+    classroom.students.remove({studentId: studentIdc});
     await classroom.save(); 
     res.status(200).json({ message: "Ученик удален из класса!", resultCode: 0 })
 });
