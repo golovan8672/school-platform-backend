@@ -9,8 +9,8 @@ const classroomSchema = new Schema({
     }],
     students: [{ _id: false, studentId: { type: String }, fio: {type: String} }],
     classTeacher: { 
-        teacherId: {type: String, default: 'none'},
-        fio: {type: String, default: 'none'}
+        teacherId: {type: String, default: ''},
+        fio: {type: String, default: ''}
      }
 })
 
