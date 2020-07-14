@@ -15,10 +15,35 @@ router.get("/classrooms/:id", async (req, res) => {
 
 // Добавление учителя и студента
 
+router.delete("/classrooms/:id/deleteMessage", async (req, res) => {
+    const classroom = await Classroom.findById({_id: req.params.id});
+    classroom.students.remove(req.body);
+    await classroom.save(); 
+    res.status(200).json({ message: "Сообщение удалено!", resultCode: 0 })
+});
+
+
+router.delete("/classrooms/:id/deleteStudent", async (req, res) => {
+    const classroom = await Classroom.findById({_id: req.params.id});
+    classroom.students.remove(req.body);
+    await classroom.save(); 
+    res.status(200).json({ message: "Ученик удален из класса!", resultCode: 0 })
+});
+
+router.post("/classrooms/:id/addMessage", async (req, res) => {
+    const classForumMessage = await Classroom.findById(req.params.id);
+
+    classForumMessage.classForumMessages.push(req.body);
+    await classForumMessage.save();
+
+    res.status(200).json({ message: "Сообщение добавлено добавлен!", resultCode: 0 })
+});
 router.post("/classrooms/:id/addStudent", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
+
     classroom.students.push(req.body);
     await classroom.save();
+
     res.status(200).json({ message: "Ученик добавлен!", resultCode: 0 })
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
