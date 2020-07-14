@@ -6,6 +6,7 @@ const classroomSchema = new Schema({
         authorId: { type: String, required: true },
         date: { type: Date, default: Date.now },
         message: { type: String, required: true }
+        
     }],
     students: [{ _id: false, studentId: { type: String }, fio: {type: String} }],
     classTeacher: { 

@@ -35,7 +35,7 @@ router.post("/classrooms/:id/addMessage", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
 
     classroom.classForumMessages.push(req.body);
-    await classForumMessage.save();
+    await classroom.save();
 
     res.status(200).json({ message: "Сообщение добавлено!", resultCode: 0 })
 });
