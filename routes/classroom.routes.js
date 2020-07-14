@@ -23,7 +23,7 @@ router.delete("/classrooms/:id/deleteMessage", async (req, res) => {
 });
 
 
-router.put("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
+router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
     const studentId = req.params.studentId
     const classroom = await Classroom.findById({_id: req.params.id});
     classroom.students.remove({studentId: studentId});
