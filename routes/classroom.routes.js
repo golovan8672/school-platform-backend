@@ -50,7 +50,13 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
 
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
-    await Classroom.findByIdAndUpdate(req.params.id, req.body)
+    let classTeacher = {
+        classTeacher: {
+            teacherId: req.body.teacherId,
+            fio: req.body.fio,
+        }
+    }
+    await Classroom.findByIdAndUpdate(req.params.id, classTeacher)
     res.status(200).json({message: "Классный руководитель добавлен!", resultCode: 0})
 });
 
