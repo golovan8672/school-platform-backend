@@ -17,7 +17,7 @@ router.get("/classrooms/:id", async (req, res) => {
 
 router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
-    classroom.message.remove({_id: req.params.messageId});
+    classroom.classForumMessages.remove({_id: req.params.messageId});
     await classroom.save(); 
     res.status(200).json({ message: "Сообщение удалено!", resultCode: 0 })
 });
