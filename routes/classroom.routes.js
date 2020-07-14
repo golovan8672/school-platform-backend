@@ -39,6 +39,7 @@ router.post("/classrooms/:id/addMessage", async (req, res) => {
     res.status(200).json({ message: "Сообщение добавлено добавлен!", resultCode: 0 })
 });
 router.post("/classrooms/:id/addStudent", async (req, res) => {
+    console.log("Body:", req.body)
     const classroom = await Classroom.findById(req.params.id);
 
     classroom.students.push(req.body);
@@ -48,7 +49,7 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
     await Classroom.findByIdAndUpdate(req.params.id, req.body)
-    res.status(200).json({message: "Классный руководитель обновлен!"})
+    res.status(200).json({message: "Классный руководитель добавлен!", resultCode: 0})
 });
 
 // Добавление и удаление классов
