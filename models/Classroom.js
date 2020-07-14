@@ -8,7 +8,10 @@ const classroomSchema = new Schema({
         message: { type: String, required: true }
     }],
     students: [{ _id: false, studentId: { type: String }, fio: {type: String} }],
-    classTeacher: { type: String, default: 'none' }
+    classTeacher: { 
+        teacherId: {type: String, default: 'none'},
+        fio: {type:String, default: 'none'}
+     }
 })
 
 module.exports = model('Classroom', classroomSchema)
