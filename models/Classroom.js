@@ -10,12 +10,12 @@ const classroomSchema = new Schema({
     classTeacher: {type: String, default: 'none'},
     students: [{ _id: false, studentId: { type: String }, fio: {type: String} , login: {type: String}, email: {type: String}, mobileNumber: {type: String}}],
     classTeacher: { 
-        teacherId: {type: String},
-        fio: {type: String},
-        login: {type: String},
-        email: {type: String},
-        mobileNumber: {type: String},
-        subject: {type: String}
+        teacherId: {type: String, default: ''},
+        fio: {type: String, default: ''},
+        login: {type: String, default: ''},
+        email: {type: String, default: ''},
+        mobileNumber: {type: String, default: ''},
+        subject: {type: String, default: ''}
      }
 
 })
