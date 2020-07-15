@@ -8,10 +8,14 @@ const classroomSchema = new Schema({
     }],
     students: [{_id: false, studentId: {type: String}}],
     classTeacher: {type: String, default: 'none'},
-    students: [{ _id: false, studentId: { type: String }, fio: {type: String} }],
+    students: [{ _id: false, studentId: { type: String }, fio: {type: String} , login: {type: String}, email: {type: String}, mobileNumber: {type: String}}],
     classTeacher: { 
-        teacherId: {type: String, default: ''},
-        fio: {type: String, default: ''}
+        teacherId: {type: String},
+        fio: {type: String},
+        login: {type: String},
+        email: {type: String},
+        mobileNumber: {type: String},
+        subject: {type: String}
      }
 
 })
