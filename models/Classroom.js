@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const classroomSchema = new Schema({
     classNumber: {type: String, required: true},
     classForumMessages: [{
+        fio: {type: String, required: true},
         authorId: {type: String, required: true},
         date: {type: Date, default: Date.now},
         message: {type: String, required: true}
