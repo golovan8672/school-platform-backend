@@ -58,6 +58,10 @@ router.put("/classrooms/:id/addTeacher", async (req, res) => {
         classTeacher: {
             teacherId: req.body.teacherId,
             fio: req.body.fio,
+            login: req.body.login,
+            email: req.body.email,
+            mobileNumber: req.body.mobileNumber,
+            subject: req.body.subject
         }
     }
     await Classroom.findByIdAndUpdate(req.params.id, classTeacher)
