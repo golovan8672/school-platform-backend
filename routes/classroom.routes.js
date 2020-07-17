@@ -72,9 +72,11 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
 
     await classroom.classForumMessages.map(message => {
-        if (message.id === req.params.messageId) 
-        message.message = req.body.message;
-        message.edited = "1";
+        if (message.id === req.params.messageId) {
+            message.message = req.body.message;
+            message.edited = "0";
+        }
+        
     })
     
     await classroom.save()
