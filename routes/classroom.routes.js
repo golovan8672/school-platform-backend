@@ -34,6 +34,8 @@ router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
 router.post("/classrooms/:id/addMessage", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
 
+    console.log(req.body)
+
     classroom.classForumMessages.push(req.body);
     await classroom.save();
 
