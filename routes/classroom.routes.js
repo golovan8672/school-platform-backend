@@ -24,7 +24,7 @@ router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
 });
 router.post("/classrooms/:id/addStudent", async (req, res) => {
     console.log("Body:", req.body)
-    const classroom = await Classroom.findById(req.params.id);
+    const classroom = await Classroom.findOne(req.params.id);
 
     classroom.students.push(req.body);
     await classroom.save();
@@ -71,7 +71,7 @@ router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
 router.put("/classrooms/:id/updateMessage", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
 
-    const message = await classroom.classForumMessages.findById({_id: req.body.id})
+    const message = await classroom.classForumMessages.findOne({_id: req.body.id})
 
     if (message) {
         message.message = req.body.message;
