@@ -160,4 +160,3 @@ router.get("/me", auth, async (req, res) => {
     res.send(user);
 });
 
-module.exports = router
