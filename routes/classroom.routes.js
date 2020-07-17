@@ -68,13 +68,18 @@ router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
     await classroom.save(); 
     res.status(200).json({ message: "Сообщение удалено!", resultCode: 0 })
 });
-router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
-    let classForumMessages = {
-        message: req.body.message,
-        edited: "1"
-    }
+router.put("/classrooms/:id/updateMessage", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
-    await classroom.classForumMessages.findByIdAndUpdate(req.params.messageId, classForumMessages)
+
+    const message = await classroom.classForumMessages.findById({_id: req.body.id})
+
+    if (message) {
+        item.message = req.body.message;
+        item.edited = "1";
+
+        message.save();
+    }
+       
     res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
 })
 
