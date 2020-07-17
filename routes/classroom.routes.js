@@ -68,7 +68,7 @@ router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
     await classroom.save(); 
     res.status(200).json({ message: "Сообщение удалено!", resultCode: 0 })
 });
-router.put("/classrooms/:id/updateMessage", async (req, res) => {
+router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
 
     await classroom.classForumMessages.map(message => {
