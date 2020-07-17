@@ -80,7 +80,7 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
         
     })
     
-    await message.save()
+    await classroom.save()
 
     res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
 })
