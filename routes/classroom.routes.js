@@ -77,7 +77,7 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
             message.edited = "1";
         } else if (!req.body.message || req.body.message === '')  {
             return res.status(401).json({message: "Нельзя передавать пустую строку!", resultCode: 1})
-        }
+        } else return res.status(404).json({message: "Нет такого сообщения!", resultCode: 1})
     })
     
     await classroom.save()
