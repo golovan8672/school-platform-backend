@@ -71,7 +71,7 @@ router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
 router.put("/classrooms/:id/updateMessage", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
 
-    const message = await classroom.classForumMessages.findOne({_id: req.body.id})
+    const message = await classroom.classForumMessages.find({_id: req.body.id})
 
     if (message) {
         message.message = req.body.message;
