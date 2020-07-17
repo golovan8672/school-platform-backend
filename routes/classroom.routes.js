@@ -76,7 +76,7 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
             message.message = req.body.message;
             message.edited = "1";
 
-            await classroom.save()
+            classroom.save()
 
             res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
 
