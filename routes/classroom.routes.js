@@ -71,13 +71,10 @@ router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
 router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
 
-    const message = await classroom.classForumMessages.map(message => {
+    await classroom.classForumMessages.map(message => {
         if (message._id === req.params.messageId) 
-        
         message.message = req.body.message;
         message.edited = "1";
-
-        
     })
     
     await classroom.save()
