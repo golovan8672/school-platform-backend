@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose')
 
 const scheduleSchema = new Schema({
-    class: {
+    classShedule: {
         classNumber: {type: String, required: true},
         Mon: {
             subjects: [{

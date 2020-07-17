@@ -24,7 +24,7 @@ router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
 });
 router.post("/classrooms/:id/addStudent", async (req, res) => {
     console.log("Body:", req.body)
-    const classroom = await Classroom.findOne(req.params.id);
+    const classroom = await Classroom.findById(req.params.id);
 
     classroom.students.push(req.body);
     await classroom.save();
@@ -50,7 +50,7 @@ router.put("/classrooms/:id/addTeacher", async (req, res) => {
 
 });
 
-//Добавление и удаление сообщения
+//Добавление и удаление, обновление сообщения
 router.post("/classrooms/:id/addMessage", async (req, res) => {
     const classroom = await Classroom.findById(req.params.id);
 
