@@ -71,13 +71,13 @@ router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
 router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
     const classroom = await Classroom.findById({_id: req.params.id});
 
-    await classroom.classForumMessages.map(message => {
+    classroom.classForumMessages.map(message => {
         if (message.id === req.params.messageId) {
             message.message = req.body.message;
-            message.edited = "0";
+            message.edited = "1";
 
             await classroom.save()
-            
+
             res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
 
         } else if (!req.body.message || req.body.message) {
