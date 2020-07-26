@@ -6,8 +6,8 @@ router.get("/getSchedules", async (req, res) => {
     const schedule = await Schedule.find().select("-__v");
     res.send(schedule);
 });
-router.get("/getSchedule/:id", async (req, res) => {
-    const schedule = await Schedule.findById({classId: req.params.id}).select("-__v")
+router.get("/getSchedule/:classId", async (req, res) => {
+    const schedule = await Schedule.findById({classId: req.params.classId}).select("-__v")
     res.send(schedule);
 });
 
