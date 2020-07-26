@@ -2,7 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const Schedule = require('../models/Schedule')
 
-router.get("/", async (req, res) => {
+router.get("/getSchedules", async (req, res) => {
     const schedule = await Schedule.find().select("-__v");
     res.send(schedule);
 });
