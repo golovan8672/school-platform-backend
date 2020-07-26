@@ -31,18 +31,19 @@ router.put("/updateSchedule/:id", async (req, res) => {
     switch (req.body.day) {
         case 'Понедельник':
             schedule.days.Mon.subjects.splice(0,6)
-            schedule.days.Mon.subjects.push(req.body.subjects)
+            req.body.subjects.map(item => schedule.days.Mon.subjects.push(item) )
             break;
         case 'Вторник':
             schedule.days.Tue.subjects.splice(0,6)
-            schedule.days.Tue.subjects.push(req.body.subjects)
+            req.body.subjects.map(item => schedule.days.Tue.subjects.push(item) )
             break;
         case 'Среда':
-            schedule.days.Wed.subjects.push(req.body.subjects)
+            schedule.days.Wed.subjects.splice(0,6)
+            req.body.subjects.map(item => schedule.days.Wed.subjects.push(item) )
             break;
         case 'Четверг':
             schedule.days.Thu.subjects.splice(0,6)
-            schedule.days.Thu.subjects.push(req.body.subjects.join(",").split())
+            req.body.subjects.map(item => schedule.days.Thu.subjects.push(item) )
             break;
         case 'Пятница':
             schedule.days.Fri.subjects.splice(0,6)
@@ -50,9 +51,7 @@ router.put("/updateSchedule/:id", async (req, res) => {
             break;
         case 'Суббота':
             schedule.days.Sat.subjects.splice(0,6)
-            for (let item of req.body.subjects){
-                schedule.days.Sat.subjects.push(item)
-            }
+            req.body.subjects.map(item => schedule.days.Sat.subjects.push(item) )
             break;
         default:
             res.status(404).json({ message: "День недели не найден!", resultCode: 1 });
