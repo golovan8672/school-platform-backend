@@ -30,9 +30,11 @@ router.put("/updateSchedule/:id", async (req, res) => {
     const schedule = await Schedule.findById({ _id: req.params.id });
     switch (req.body.day) {
         case 'Понедельник':
+            schedule.days.Mon.subjects.splice(0,6)
             schedule.days.Mon.subjects.push(req.body.subjects)
             break;
         case 'Вторник':
+            schedule.days.Tue.subjects.splice(0,6)
             schedule.days.Tue.subjects.push(req.body.subjects)
             break;
         case 'Среда':
