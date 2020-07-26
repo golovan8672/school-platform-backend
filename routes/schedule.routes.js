@@ -10,6 +10,17 @@ router.get("/getSchedule/:classId", async (req, res) => {
     const schedule = await Schedule.find({classId: req.params.classId}).select("-__v")
     res.send(schedule);
 });
+router.delete("/deleteSchedule/:classId", async (req, res) => {
+    await Schedule.remove({classId: req.params.classId})
+    res.status(200).json({ message: "Расписание удалено!", resultCode: 0 })
+});
+router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
+    const studentId = req.params.studentId
+    const classroom = await Classroom.findById({_id: req.params.id});
+    classroom.students.remove({studentId: studentId});
+    await classroom.save(); 
+    
+});
 
 router.post("/addSchedule", async (req, res) => {
     try {
