@@ -46,10 +46,11 @@ router.put("/updateSchedule/:id", async (req, res) => {
             break;
         case 'Пятница':
             schedule.days.Fri.subjects.splice(0,6)
-            schedule.days.Fri.subjects.push(req.body.subjects.join(",").split(","))
+            schedule.days.Fri.subjects.push(req.body.subjects.split(","))
             break;
         case 'Суббота':
-            schedule.days.Sat.subjects.push(req.body.subjects)
+            schedule.days.Sat.subjects.splice(0,6)
+            schedule.days.Sat.subjects.push(req.body.subjects.split(","))
             break;
         default:
             res.status(404).json({ message: "День недели не найден!", resultCode: 1 });
