@@ -30,22 +30,23 @@ router.put("/updateSchedule/:id", async (req, res) => {
     const schedule = await Schedule.findById({ _id: req.params.id });
     switch (req.body.day) {
         case 'Понедельник':
-            days.Mon.subjects.push(req.body)
+            schedule.days.Mon.subjects.push(req.body)
         case 'Вторник':
-            days.Tue.subjects.push(req.body)
+            schedule.days.Tue.subjects.push(req.body)
         case 'Среда':
-            days.Wed.subjects.push(req.body)
+            schedule.days.Wed.subjects.push(req.body)
         case 'Четверг':
-            days.Thu.subjects.push(req.body)
+            schedule.days.Thu.subjects.push(req.body)
         case 'Пятница':
-            days.Fri.subjects.push(req.body)
+            schedule.days.Fri.subjects.push(req.body)
         case 'Суббота':
-            days.Sat.subjects.push(req.body)
+            schedule.days.Sat.subjects.push(req.body)
         default:
             res.status(404).json({ message: "День недели не найден!", resultCode: 1 });
 
     }
     await schedule.save()
+    res.status(200).json({ message: "Расписание обновлено!", resultCode: 1 });
 
 })
 
