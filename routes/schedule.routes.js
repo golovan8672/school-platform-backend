@@ -42,10 +42,11 @@ router.put("/updateSchedule/:id", async (req, res) => {
             break;
         case 'Четверг':
             schedule.days.Thu.subjects.splice(0,6)
-            schedule.days.Thu.subjects.push(req.body.subjects.join(","))
+            schedule.days.Thu.subjects.push(req.body.subjects.join(",").split())
             break;
         case 'Пятница':
-            schedule.days.Fri.subjects.push(req.body.subjects)
+            schedule.days.Fri.subjects.splice(0,6)
+            schedule.days.Fri.subjects.push(req.body.subjects.join(",").split(","))
             break;
         case 'Суббота':
             schedule.days.Sat.subjects.push(req.body.subjects)
