@@ -6,6 +6,10 @@ router.get("/getSchedules", async (req, res) => {
     const schedule = await Schedule.find().select("-__v");
     res.send(schedule);
 });
+router.get("/getSchedule/:id", async (req, res) => {
+    const schedule = await Schedule.findById({classId: req.params.id}).select("-__v")
+    res.send(schedule);
+});
 
 router.post("/addSchedule", async (req, res) => {
     try {
