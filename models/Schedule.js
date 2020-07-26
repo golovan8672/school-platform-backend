@@ -4,49 +4,49 @@ const scheduleSchema = new Schema({
     classShedule: {
         classNumber: { type: String, required: true },
         Mon: {
-            day: "Понедельник",
+            day: {type: String, default: "Понедельник"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
         },
         Tue: {
-            day: "Вторник",
+            day: {type: String, default: "Вторник"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
         },
         Wed: {
-            day: "Среда",
+            day: {type: String, default: "Среда"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
         },
         Thu: {
-            day: "Четверг",
+            day: {type: String, default: "Четверг"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
         },
         Fri: {
-            day: "Пятница",
+            day: {type: String, default: "Пятница"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
         },
         Sat: {
-            day: "Суббота",
+            day: {type: String, default: "Суббота"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
         },
         Sun: {
-            day: "Воскресенье",
+            day: {type: String, default: "Воскресенье"},
             subjects: {
                 type: Array,
                 default: [null, null, null, null, null, null]
