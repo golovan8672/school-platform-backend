@@ -2,52 +2,58 @@ const { Schema, model } = require('mongoose')
 
 const scheduleSchema = new Schema({
     classShedule: {
-        classNumber: {type: String, required: true},
+        classNumber: { type: String, required: true },
         Mon: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-                
-            }]
+            day: "Понедельник",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
         Tue: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-            }]
+            day: "Вторник",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
         Wed: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-            }]
+            day: "Среда",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
         Thu: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-            }]
+            day: "Четверг",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
         Fri: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-            }]
+            day: "Пятница",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
         Sat: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-            }]
+            day: "Суббота",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
-       Sun: {
-            subjects: [{
-                subject: {type: String},
-                teacherFio: {type: String}
-            }]
+        Sun: {
+            day: "Воскресенье",
+            subjects: {
+                type: Array,
+                default: [null, null, null, null, null, null]
+            }
         },
     }
-   
+
 })
 
 module.exports = model('Schedule', scheduleSchema)

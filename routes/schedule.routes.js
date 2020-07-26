@@ -8,15 +8,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/addSchedule", async (req, res) => {
-
-    const classroom = await Classroom.findById(req.params.id);
-
-    classroom.students.push(req.body);
-    await classroom.save();
-
-    res.status(200).json({ message: "Расписание добавлено!", resultCode: 0 })
-
+    try {
+        const newSchedule = new Schedule(req.body)
+        await newSchedule.save()
+        res.status(201).json({ message: "Расписание создано", resultCode: 0 })
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 });
+
 
 
 
