@@ -45,8 +45,9 @@ router.put("/updateSchedule/:id", async (req, res) => {
             res.status(404).json({ message: "День недели не найден!", resultCode: 1 });
 
     }
-    await schedule.save()
     res.status(200).json({ message: "Расписание обновлено!", resultCode: 1 });
+    await schedule.save()
+
 
 })
 
