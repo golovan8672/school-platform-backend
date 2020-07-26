@@ -17,6 +17,23 @@ router.post("/addSchedule", async (req, res) => {
     }
 });
 
+router.put("/updateSchedule", async (req, res) => {
+    const schedule = await Schedule.findById({_id: req.params.id});
+
+    classroom.classForumMessages.map(message => {
+        if (message.id === req.params.messageId) {
+            message.message = req.body.message;
+            message.edited = "1";
+        } else if (!req.body.message)  {
+            return res.status(401).json({message: "Нельзя передавать пустую строку!", resultCode: 1})
+        }
+    })
+    
+    await classroom.save()
+
+    res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
+   
+})
 
 
 
