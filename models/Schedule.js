@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose')
 
 const scheduleSchema = new Schema({
-    classShedule: {
         classNumber: { type: String, required: true },
         Mon: {
             day: {type: String, default: "Понедельник"},
@@ -51,9 +50,7 @@ const scheduleSchema = new Schema({
                 type: Array,
                 default: [null, null, null, null, null, null]
             }
-        },
-    }
-
+        }
 })
 
 module.exports = model('Schedule', scheduleSchema)
