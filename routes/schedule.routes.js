@@ -26,7 +26,7 @@ router.post("/addSchedule", async (req, res) => {
 });
 
 
-router.put("/updateSchedule", async (req, res) => {
+router.put("/updateSchedule/:id", async (req, res) => {
     const schedule = await Schedule.findById({ _id: req.params.id });
     switch (req.body.day) {
         case 'Понедельник':
