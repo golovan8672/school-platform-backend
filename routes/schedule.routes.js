@@ -7,19 +7,12 @@ router.get("/getSchedules", async (req, res) => {
     res.send(schedule);
 });
 router.get("/getSchedule/:classId", async (req, res) => {
-    const schedule = await Schedule.find({classId: req.params.classId}).select("-__v")
+    const schedule = await Schedule.find({ classId: req.params.classId }).select("-__v")
     res.send(schedule);
 });
 router.delete("/deleteSchedule/:classId", async (req, res) => {
-    await Schedule.remove({classId: req.params.classId})
+    await Schedule.remove({ classId: req.params.classId })
     res.status(200).json({ message: "Расписание удалено!", resultCode: 0 })
-});
-router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
-    const studentId = req.params.studentId
-    const classroom = await Classroom.findById({_id: req.params.id});
-    classroom.students.remove({studentId: studentId});
-    await classroom.save(); 
-    
 });
 
 router.post("/addSchedule", async (req, res) => {
@@ -32,24 +25,28 @@ router.post("/addSchedule", async (req, res) => {
     }
 });
 
+
 router.put("/updateSchedule", async (req, res) => {
-    const schedule = await Schedule.findById({_id: req.params.id});
+    const schedule = await Schedule.findById({ _id: req.params.id });
+    switch (req.body.day) {
+        case 'Понедельник':
+            days.Mon.subjects.push(req.body)
+        case 'Вторник':
+            days.Tue.subjects.push(req.body)
+        case 'Среда':
+            days.Wed.subjects.push(req.body)
+        case 'Четверг':
+            days.Thu.subjects.push(req.body)
+        case 'Пятница':
+            days.Fri.subjects.push(req.body)
+        case 'Суббота':
+            days.Sat.subjects.push(req.body)
+        default:
+            res.status(404).json({ message: "День недели не найден!", resultCode: 1 });
 
-    classroom.classForumMessages.map(message => {
-        if (message.id === req.params.messageId) {
-            message.message = req.body.message;
-            message.edited = "1";
-        } else if (!req.body.message)  {
-            return res.status(401).json({message: "Нельзя передавать пустую строку!", resultCode: 1})
-        }
-    })
-    
-    await classroom.save()
+    }
+    await schedule.save()
 
-    res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
-   
 })
-
-
 
 module.exports = router

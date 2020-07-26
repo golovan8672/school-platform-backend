@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const scheduleSchema = new Schema({
         classNumber: { type: String, required: true },
         classId: {type: String, required: true},
-        Days: {
+        days: {
             Mon: {
                 day: {type: String, default: "Понедельник"},
                 subjects: {
@@ -46,13 +46,6 @@ const scheduleSchema = new Schema({
                     default: [null, null, null, null, null, null]
                 }
             },
-            Sun: {
-                day: {type: String, default: "Воскресенье"},
-                subjects: {
-                    type: Array,
-                    default: [null, null, null, null, null, null]
-                }
-            }
         }
         
 })
