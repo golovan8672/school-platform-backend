@@ -92,7 +92,7 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
 
 router.post("/addClassroom", async (req, res) => {
     try {
-        const availableClassroom = await Classroom.find(req.body)
+        const availableClassroom = await Classroom.findOne(req.body)
         if (availableClassroom){
             return res.status(202).json({message: 'Класс с таким номером уже существует!', resultCode: 1})
         }
