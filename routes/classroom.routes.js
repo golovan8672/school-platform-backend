@@ -5,85 +5,128 @@ const Classroom = require('../models/Classroom')
 // Получение списка классов и класса 
 
 router.get("/classrooms", async (req, res) => {
-    const classrooms = await Classroom.find().select("-__v");
-    res.send(classrooms);
+    try {
+        const classrooms = await Classroom.find().select("-__v");
+        res.send(classrooms);
+    }
+    catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 });
 router.get("/classrooms/:id", async (req, res) => {
-    const classroom = await Classroom.findById(req.params.id).select("-__v")
-    res.send(classroom);
+    try {
+        const classroom = await Classroom.findById(req.params.id).select("-__v")
+        res.send(classroom);
+    }
+    catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 });
 
 // Добавление и удаление учителя и студента
 
 router.delete("/classrooms/:id/deleteStudent/:studentId", async (req, res) => {
-    const studentId = req.params.studentId
-    const classroom = await Classroom.findById({_id: req.params.id});
-    classroom.students.remove({studentId: studentId});
-    await classroom.save(); 
-    res.status(200).json({ message: "Ученик удален из класса!", resultCode: 0 })
+    try {
+
+
+        const studentId = req.params.studentId
+        const classroom = await Classroom.findById({ _id: req.params.id });
+        classroom.students.remove({ studentId: studentId });
+        await classroom.save();
+        res.status(200).json({ message: "Ученик удален из класса!", resultCode: 0 })
+    }
+    catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 });
 router.post("/classrooms/:id/addStudent", async (req, res) => {
-    console.log("Body:", req.body)
-    const classroom = await Classroom.findById(req.params.id);
+    try {
+        console.log("Body:", req.body)
+        const classroom = await Classroom.findById(req.params.id);
 
-    classroom.students.push(req.body);
-    await classroom.save();
+        classroom.students.push(req.body);
+        await classroom.save();
 
-    res.status(200).json({ message: "Ученик добавлен!", resultCode: 0 })
+        res.status(200).json({ message: "Ученик добавлен!", resultCode: 0 })
+    }
+    catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
+    try {
 
-    let classTeacher = {
-        classTeacher: {
-            teacherId: req.body.teacherId,
-            fio: req.body.fio,
-            login: req.body.login,
-            email: req.body.email,
-            mobileNumber: req.body.mobileNumber,
-            subject: req.body.subject
+
+
+        let classTeacher = {
+            classTeacher: {
+                teacherId: req.body.teacherId,
+                fio: req.body.fio,
+                login: req.body.login,
+                email: req.body.email,
+                mobileNumber: req.body.mobileNumber,
+                subject: req.body.subject
+            }
         }
+
+        await Classroom.findByIdAndUpdate(req.params.id, classTeacher)
+        res.status(200).json({ message: "Классный руководитель добавлен!", resultCode: 0 })
     }
-    
-    await Classroom.findByIdAndUpdate(req.params.id, classTeacher)
-    res.status(200).json({message: "Классный руководитель добавлен!", resultCode: 0})
+    catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 
 });
 
 //Добавление и удаление, обновление сообщения
 router.post("/classrooms/:id/addMessage", async (req, res) => {
-    const classroom = await Classroom.findById(req.params.id);
+    try {
+        const classroom = await Classroom.findById(req.params.id);
 
-    console.log(req.body)
+        console.log(req.body)
 
-    classroom.classForumMessages.push(req.body);
-    await classroom.save();
+        classroom.classForumMessages.push(req.body);
+        await classroom.save();
 
-    res.status(200).json({ message: "Сообщение добавлено!", resultCode: 0 })
+        res.status(200).json({ message: "Сообщение добавлено!", resultCode: 0 })
+    }
+    catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 });
 
 router.delete("/classrooms/:id/deleteMessage/:messageId", async (req, res) => {
-    const classroom = await Classroom.findById({_id: req.params.id});
-    classroom.classForumMessages.remove({_id: req.params.messageId});
-    await classroom.save(); 
-    res.status(200).json({ message: "Сообщение удалено!", resultCode: 0 })
+    try {
+        const classroom = await Classroom.findById({ _id: req.params.id });
+        classroom.classForumMessages.remove({ _id: req.params.messageId });
+        await classroom.save();
+        res.status(200).json({ message: "Сообщение удалено!", resultCode: 0 })
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 });
 router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
-    const classroom = await Classroom.findById({_id: req.params.id});
+    try {
 
-    classroom.classForumMessages.map(message => {
-        if (message.id === req.params.messageId) {
-            message.message = req.body.message;
-            message.edited = "1";
-        } else if (!req.body.message)  {
-            return res.status(401).json({message: "Нельзя передавать пустую строку!", resultCode: 1})
-        }
-    })
-    
-    await classroom.save()
+        const classroom = await Classroom.findById({ _id: req.params.id });
 
-    res.status(200).json({message: "Сообщение обновлено!", resultCode: 0})
-   
+        classroom.classForumMessages.map(message => {
+            if (message.id === req.params.messageId) {
+                message.message = req.body.message;
+                message.edited = "1";
+            } else if (!req.body.message) {
+                return res.status(401).json({ message: "Нельзя передавать пустую строку!", resultCode: 1 })
+            }
+        })
+
+        await classroom.save()
+
+        res.status(200).json({ message: "Сообщение обновлено!", resultCode: 0 })
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
+
 })
 
 
@@ -93,8 +136,8 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
 router.post("/addClassroom", async (req, res) => {
     try {
         const availableClassroom = await Classroom.findOne(req.body)
-        if (availableClassroom){
-            return res.status(202).json({message: 'Класс с таким номером уже существует!', resultCode: 1})
+        if (availableClassroom) {
+            return res.status(202).json({ message: 'Класс с таким номером уже существует!', resultCode: 1 })
         }
         const newClassroom = new Classroom(req.body)
         await newClassroom.save()
@@ -105,8 +148,12 @@ router.post("/addClassroom", async (req, res) => {
 });
 
 router.delete('/deleteClassroom/:id', async (req, res) => {
-    await Classroom.findByIdAndRemove({ _id: req.params.id })
-    res.status(200).json({ message: "Класс удален!" })
+    try {
+        await Classroom.findByIdAndRemove({ _id: req.params.id })
+        res.status(200).json({ message: "Класс удален!" })
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
 })
 
 module.exports = router
