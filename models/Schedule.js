@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 
 const scheduleSchema = new Schema({
         classNumber: { type: String, required: true },
+        classId: {type: String, required: true},
         days: {
             Mon: {
                 day: {type: String, default: "Понедельник"},
