@@ -10,8 +10,8 @@ router.get("/getSchedule/:classId", async (req, res) => {
     const schedule = await Schedule.find({ classId: req.params.classId }).select("-__v")
     res.send(schedule);
 });
-router.delete("/deleteSchedule/:classId", async (req, res) => {
-    await Schedule.remove({ classId: req.params.classId })
+router.delete("/deleteSchedule/:id", async (req, res) => {
+    await Schedule.findByIdAndRemove({ _id: req.params.id })
     res.status(200).json({ message: "Расписание удалено!", resultCode: 0 })
 });
 
