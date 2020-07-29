@@ -36,7 +36,7 @@ router.post('/teacherReg', async (req, res) => {
     try {
         console.log("Body:", req.body)
 
-        const {fio, login, email, mobileNumber, role, classroom, subject, password} = req.body
+        const {fio, login, email, mobileNumber, role, classId, classNumber, subject, password} = req.body
 
         const teacherLogin = await Teacher.findOne({login}) || await Student.findOne({login}) || await Moderator.findOne({login})
         const teacherEmail = await Teacher.findOne({email}) || await Student.findOne({email})
@@ -80,7 +80,7 @@ router.post('/studentReg', async (req, res) => {
     try {
         console.log("Body:", req.body)
 
-        const {fio, login, email, mobileNumber, classroom, role, password} = req.body
+        const {fio, login, email, mobileNumber, classId, classNumber, role, password} = req.body
 
         const studentLogin = await Student.findOne({login}) || await Teacher.findOne({login}) || await Moderator.findOne({login})
         const studentEmail = await Student.findOne({email}) || await Teacher.findOne({email})
