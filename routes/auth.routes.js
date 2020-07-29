@@ -62,7 +62,8 @@ router.post('/teacherReg', async (req, res) => {
             email,
             mobileNumber,
             role,
-            classroom,
+            classId,
+            classNumber,
             subject,
             password: hashedPassword
         })
@@ -99,7 +100,7 @@ router.post('/studentReg', async (req, res) => {
 
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        const student = new Student({fio, login, email, mobileNumber, role, classroom, password: hashedPassword})
+        const student = new Student({fio, login, email, mobileNumber, role, classId, classNumber, password: hashedPassword})
 
         await student.save()
 

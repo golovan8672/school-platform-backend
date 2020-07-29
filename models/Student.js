@@ -5,7 +5,8 @@ const studentSchema = new Schema({
     email: {type: String, required: true, unique: true},
     mobileNumber: {type: String, required: true, unique: true},
     login: {type: String, required: true, unique: true},
-    classroom: {type: String},
+    classId: {type: String},
+    classNumber: {type: String},
     role: {type: String, default: 'student'},
     password: {type: String, required: true}
 })
