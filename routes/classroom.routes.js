@@ -56,9 +56,6 @@ router.post("/classrooms/:id/addStudent", async (req, res) => {
 });
 router.put("/classrooms/:id/addTeacher", async (req, res) => {
     try {
-
-
-
         let classTeacher = {
             classTeacher: {
                 teacherId: req.body.teacherId,
@@ -89,7 +86,7 @@ router.post("/classrooms/:id/addMessage", async (req, res) => {
         classroom.classForumMessages.push(req.body);
         await classroom.save();
 
-        res.status(200).json({ message: "Сообщение добавлено!", resultCode: 0 })
+        res.status(201).json({ message: "Сообщение добавлено!", resultCode: 0 })
     }
     catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
@@ -128,6 +125,8 @@ router.put("/classrooms/:id/updateMessage/:messageId", async (req, res) => {
     }
 
 })
+
+
 
 
 

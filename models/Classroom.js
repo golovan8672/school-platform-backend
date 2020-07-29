@@ -18,8 +18,7 @@ const classroomSchema = new Schema({
         email: {type: String, default: ''},
         mobileNumber: {type: String, default: ''},
         subject: {type: String, default: ''}
-     }
-
+     },
 })
 
 module.exports = model('Classroom', classroomSchema)
