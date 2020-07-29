@@ -52,7 +52,7 @@ router.post("/addTask", async (req, res) => {
         res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
 });
-router.delete("/classrooms/:id/deleteTask/:taskId", async (req, res) => {
+router.delete("/deleteTask/:taskId", async (req, res) => {
     try {
         await Task.findByIdAndRemove({ _id: req.params.id })
         res.status(200).json({ message: "Задание удалено!" })
