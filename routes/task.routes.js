@@ -29,6 +29,7 @@ router.put("/updateTask/:id", async (req, res) => {
 
         task.taskTitle = req.body.taskTitle,
         task.taskText = req.body.taskText,
+        task.deadlineDate = req.body.deadlineDate, 
         task.edited = "1",
         task.editedDate = req.body.editedDate
 

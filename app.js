@@ -16,8 +16,6 @@ app.use('/api/classroom', require('./routes/classroom.routes'))
 app.use('/api/schedule', require('./routes/schedule.routes'))
 app.use('/api/task', require('./routes/task.routes'))
 
-
-
 mongoose.connect(process.env.MONGODB_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
