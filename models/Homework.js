@@ -9,5 +9,6 @@ const homeworkSchema = new Schema({
     answerToTask: { type: String, required: true },
     mark: {type: String, enum: ["","2","3","4","5"], default: ""},
     teacherDesc: {type: String, default: ''},
+    status: {type: String, enub: ["Не проверено", "Проверено"], default: "Не проверено"}
 })
 module.exports = model('Homework', homeworkSchema)
