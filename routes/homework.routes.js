@@ -29,7 +29,7 @@ router.put("/setMark/:id", async (req, res) => {
 
         homework.mark = req.body.mark,
         homework.teacherDesc = req.body.teacherDesc,
-        homework.status = req.body.status
+        homework.status = "Проверено"
 
         await homework.save()
 
