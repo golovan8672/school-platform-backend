@@ -4,6 +4,7 @@ const homeworkSchema = new Schema({
     taskId: {type: String, required: true},
     student: {type: String, required: true},
     publicDate: { type: String, required: true },
+    publicTaskDate: {type: String, required: true},
     subject: { type: String, required: true },
     teacher: { type: String, required: true },
     taskTitle: {type: String, required: true},
