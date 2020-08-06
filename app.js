@@ -30,8 +30,8 @@ const upload = multer({storage}).single('image')
 
 const doDownload = (req, res) => {
     const s3Client = new AWS.S3({
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.AWS_ID,
+        secretAccessKey: process.env.AWS_SECRET,
         region: process.env.AWS_REGION
     });
     const params = {
