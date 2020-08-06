@@ -28,6 +28,25 @@ const storage = multer.memoryStorage({
 
 const upload = multer({storage}).single('image')
 
+const doDownload = (req, res) => {
+    const s3Client = new AWS.S3({
+        accessKeyId: env.AWS_ACCESS_KEY,
+        secretAccessKey: env.AWS_SECRET_ACCESS_KEY
+    });
+    const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: req.file.originalname,
+    }
+    
+    s3Client.getObject(params)
+      .createReadStream()
+        .on('error', function(err){
+          res.status(500).json({error:"Error -> " + err});
+      }).pipe(res);
+  }
+
+app.get('/api/files/:filename', doDownload);
+
 app.post('/api/upload',upload,(req, res) => {
 
     console.log(req.file)
