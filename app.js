@@ -13,6 +13,8 @@ app.use(cors({credentials: true, origin: true}))
 
 const port = process.env.PORT || 80
 
+app.use(express.json({ extended: true }))
+
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ID,
     secretAccessKey: process.env.AWS_SECRET
@@ -27,6 +29,8 @@ const storage = multer.memoryStorage({
 const upload = multer({storage}).single('image')
 
 app.post('/api/upload',upload,(req, res) => {
+
+    console.log(req.file)
 
     let myFile = req.file.originalname.split(".")
     const fileType = myFile[myFile.length - 1]
@@ -48,7 +52,7 @@ app.post('/api/upload',upload,(req, res) => {
 
 
 
-app.use(express.json({ extended: true }))
+
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/users', require('./routes/users.routes'))
