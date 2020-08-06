@@ -35,7 +35,7 @@ const doDownload = (req, res) => {
     });
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: req.file.originalname,
+        Key: req.params.filename,
     }
     
     s3Client.getObject(params)
