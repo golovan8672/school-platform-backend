@@ -3,7 +3,6 @@ require('dotenv/config')
 const express = require('express')
 const multer = require('multer')
 const AWS = require('aws-sdk')
-const uuid = require('uuid')
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose')
 const cors = require('cors')
