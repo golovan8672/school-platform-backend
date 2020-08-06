@@ -7,6 +7,7 @@ const taskSchema = new Schema({
     teacher: { type: String, required: true },
     taskTitle: { type: String, required: true },
     taskText: { type: String, required: true },
+    taskFileName:{type: String, required: true},
     edited: {type: String, default: "0"},
     editedDate:{type: String, default: ''}
 })
