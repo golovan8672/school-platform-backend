@@ -18,6 +18,12 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.AWS_SECRET
 })
 
+const storage = multer.memoryStorage({
+    destination: function(req, file, callback) {
+        callback(null, '')
+    }
+})
+
 const upload = multer({storage}).single('image')
 
 app.post('/api/upload',upload,(req, res) => {
@@ -40,12 +46,6 @@ app.post('/api/upload',upload,(req, res) => {
     })
 })
 
-
-const storage = multer.memoryStorage({
-    destination: function(req, file, callback) {
-        callback(null, '')
-    }
-})
 
 
 app.use(express.json({ extended: true }))
