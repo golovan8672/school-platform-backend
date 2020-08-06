@@ -37,7 +37,7 @@ app.post('/api/upload',upload,(req, res) => {
 
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `${req.file.originalname}.${fileType}`,
+        Key: req.file.originalname,
         Body: req.file.buffer
     }
 
