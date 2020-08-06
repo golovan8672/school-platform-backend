@@ -9,6 +9,7 @@ const homeworkSchema = new Schema({
     teacher: { type: String, required: true },
     taskTitle: {type: String, required: true},
     answerToTask: { type: String, required: true },
+    answerFileName: {type: String, required: true},
     deadlineDate: {type: String, required: true},
     mark: {type: String, enum: ["","2","3","4","5"], default: ""},
     teacherDesc: {type: String, default: ''},
