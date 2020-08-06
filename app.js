@@ -4,6 +4,7 @@ const express = require('express')
 const multer = require('multer')
 const AWS = require('aws-sdk')
 const uuid = require('uuid')
+const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose')
 const cors = require('cors')
 
@@ -37,7 +38,7 @@ app.post('/api/upload',upload,(req, res) => {
 
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `${uuid()}.${fileType}`,
+        Key: `${uuidv4()}.${fileType}`,
         Body: req.file.buffer
     }
 
