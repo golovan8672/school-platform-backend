@@ -9,8 +9,6 @@ app.use(cors({credentials: true, origin: true}))
 
 const port = process.env.PORT || 80
 
-
-
 app.use(express.json({ extended: true }))
 
 app.use('/api/auth', require('./routes/auth.routes'))
